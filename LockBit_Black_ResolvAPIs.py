@@ -2,8 +2,6 @@ import idaapi
 import idautils
 import ida_name
 import idc
-import re
-import time
 
 def rol(value, shift):
     bits = 32
