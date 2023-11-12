@@ -1,6 +1,7 @@
 # LockBit-Black_ResolveAPI
 Script for resolving API function names in IDA.
 ```
+hash of the sample sha256:
 0845a8c3be602a72e23a155b23ad554495bd558fa79e1bb849aa75f79d069194
 ```
 <p align="center">
