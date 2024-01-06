@@ -70,17 +70,13 @@ def start_seg_ea(name_seg: str) -> int:
     return None
 
 def is_name_used(name):
-    '''
-    Проверяет, используется ли имя функции
-    ещё где-либо.'''
+    '''Проверяет, используется ли имя функции ещё где-либо.'''
     ea = ida_name.get_name_ea(idc.BADADDR, name)
     return ea != idc.BADADDR
 
 
 def C_code_set_comment(addr: int, comnt: str):
-    '''
-    Задает комментарий в псевдокоде на Си
-    по определенному адресу.'''
+    '''Задает комментарий в псевдокоде на Си по определенному адресу.'''
     ea = addr
     cfunc = idaapi.decompile(ea)
     tl = idaapi.treeloc_t()
@@ -94,10 +90,9 @@ def C_code_renvar(
     new_name: str, 
     old_name: str = None, 
     index: int = None):
-    '''
-    Переименовывает переменную, для определенного виджета,
-    доступ к переменной либо по индексу 
-    либо по известному имени.'''
+    '''Переименовывает переменную, для определенного виджета,
+       доступ к переменной либо по индексу 
+       либо по известному имени.'''
 
     widget = ida_kernwin.find_widget(name_widget) 
     vu = ida_hexrays.get_widget_vdui(widget)
@@ -134,9 +129,7 @@ def refresh_pseudocode_view(ea):
                 vu.refresh_view(True)
 
 def set_renames_vars():
-    '''
-    Переименовывает имена переменных в
-    псевдокоде на Си.'''
+    '''Переименовывает имена переменных в псевдокоде на Си.'''
     names_cwidgt = ["Pseudocode-%c" % chr(ord("A") + i) for i in range(5)]
 
     ren_vars = {
@@ -152,8 +145,7 @@ def set_renames_vars():
             old_name= old_name)
 
 def set_renames_func():
-    '''
-    Переименовывает имена функций.'''
+    '''Переименовывает имена функций.'''
     segm_text = start_seg_ea(".text")
     func_1 = 0x539c # ResolveAPIs
     func_2 = 0x4da0 # ParseAPIHashTable
@@ -173,8 +165,7 @@ def set_renames_func():
     
 
 def set_lot_comments():
-    '''Задает комментарии для 
-    дизассемблера и кода на Си.'''
+    '''Задает комментарии для дизассемблера и кода на Си.'''
     rvas_comments = {
     0x53a9: "0xf80f18e8 == hash(RtlCreateHeap) from ntdll.dll",
     0x53e8: "0x6e6047db == hash(HeapAlloc) from kernel32.dll",
@@ -232,8 +223,7 @@ def main():
         if curr_eip < corr_eip:
             go_cor_eip()
 
-    '''
-    Режим отладки отключен.'''
+    '''Режим отладки отключен.'''
     if not idaapi.is_debugger_on():
         '''Отладчик не выбран.'''
         if  not idaapi.dbg_is_loaded():
@@ -243,8 +233,7 @@ def main():
            
         
     if segm_data:
-        '''
-        Первые четыре адреса указывают не не стаб 
+        '''Первые четыре адреса указывают не не стаб 
         с шелл-кодом, а на виртуальные адреса функций
         из ntdll.dll и kernel32.dll:
         LdrLoadDll, LdrGetProcedureAddress,
