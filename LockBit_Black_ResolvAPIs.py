@@ -193,7 +193,7 @@ def set_lot_comments():
     segm_text = start_seg_ea(".text")
 
     refr_area = (
-    segm_text + 0x539c # 0x539c refresh ResolvAPIs
+    segm_text + 0x539c, # 0x539c refresh ResolvAPIs
     )
 
     for rva in rvas_comments:
